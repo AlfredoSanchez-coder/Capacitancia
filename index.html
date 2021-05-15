@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fisica</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link href="./open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+	<div id="appFisica">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="javascript:;">Proyecto Expobatiz</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" :class="pantalla == 1 ? 'active': ''" href="javascript:;" @click="abrirPantalla(1)">Resistencia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" :class="pantalla == 2 ? 'active': ''" href="javascript:;" @click="abrirPantalla(2)">Capacitacia</a>
+					</li>
+					
+				</ul>
+			</div>  
+		</nav>
+		<hr>
+		<main class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<form-resistencia
+					v-if ="pantalla == 1"
+					:key ="Math.random()">	
+					</form-resistencia>
+
+					<form-capacitancia
+					v-if ="pantalla == 2"
+					:key ="Math.random()">	
+					</form-capacitancia>
+
+					<form-inductancia
+					v-if ="pantalla == 3"
+					:key ="Math.random()">	
+					</form-inductancia>
+
+
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<template id="form-resistencia">
+		<div class="card shadow-sm">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<ul class="nav nav-pills flex-column">
+							<li class="nav-item">
+								<a href="javascript:;" class="nav-link" :class="tipo == 1 ? 'active': ''" @click="setTipo(1)">En Serie</a>
+							</li>
+							<li class="nav-item">
+								<a href="javascript:;" class="nav-link" :class="tipo == 2 ? 'active': ''" @click="setTipo(2)">En Paralelo</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-8">
+						<h2>Resistencia en {{ (tipo == 1) ? 'Serie' : 'Paralelo' }}</h2>
+						<form class="form-horizontal" @submit.prevent="calcularResistencia">
+							<template v-for="i in cntInput">
+								<div class="form-group form-group-sm row">
+									<div class="input-group col-sm-7">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-sm btn-danger" @click="removerInput(i)">										
+												<i class="oi oi-trash"></i>
+											</button>
+										</div>
+										<input type="number" class="form-control" step="any" v-model="form.resistencia[i]" :placeholder="'R'+i" required>
+										<div class="input-group-append">
+											<select class="form-control" v-model="form.medida[i]" required>
+												<option v-for="(i, k) in medidas" :value="k" :title="i.nombre">{{ i.titulo }}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</template>
+							<div class="form-group form-group-sm row">
+								<div class="col-sm-7">
+									<button type="button" class="btn btn-sm btn-secondary btn-block" @click="nuevoInput"><i class="oi oi-plus"></i></button>
+								</div>
+								<div class="col-sm-2">
+									<button type="submit" class="btn btn-sm btn-info btn-block"><i class="oi oi-calculator"></i></button>
+								</div>
+							</div>
+							<div class="form-group form-group-sm row">
+								<label class="control-label col-sm-5">
+									Resultado: <br>
+									Decimal: {{resultado}} <br>
+									Notación: {{ $parent.notacion(resultado) }}
+								</label>
+
+								<select class="form-control col-sm-2" v-model="medidafinal" @change="calcularResistencia" required>
+							 		<option v-for="(i, k) in medidas" :value="k" :title="i.nombre">{{ i.titulo }}</option>
+							 	</select>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<template id="form-capacitancia">
+		<div class="card shadow-sm">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<ul class="nav nav-pills flex-column">
+							<li class="nav-item">
+								<a href="javascript:;" class="nav-link" :class="tipo == 1 ? 'active': ''" @click="setTipo(1)">En Serie</a>
+							</li>
+							<li class="nav-item">
+								<a href="javascript:;" class="nav-link" :class="tipo == 2 ? 'active': ''" @click="setTipo(2)">En Paralelo</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-8">
+						<h2>Capacitancia en {{ (tipo == 1) ? 'Serie' : 'Paralelo' }}</h2>
+						<form class="form-horizontal" @submit.prevent="calcularCapacitancia">
+							<template v-for="i in cntInput">
+								<div class="form-group form-group-sm row">
+									<div class="input-group col-sm-7">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-sm btn-danger" @click="removerInput(i)">										
+												<i class="oi oi-trash"></i>
+											</button>
+										</div>
+										<input type="number" class="form-control" step="any" v-model="form.capacitancia[i]" :placeholder="'C'+i" required>
+										<div class="input-group-append">
+											<select class="form-control" v-model="form.medida[i]" required>
+												<option v-for="(i, k) in medidas" :value="k" :title="i.nombre">{{ i.titulo }}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</template>
+							<div class="form-group form-group-sm row">
+								<div class="col-sm-7">
+									<button type="button" class="btn btn-sm btn-secondary btn-block" @click="nuevoInput"><i class="oi oi-plus"></i></button>
+								</div>
+								<div class="col-sm-2">
+									<button type="submit" class="btn btn-sm btn-info btn-block"><i class="oi oi-calculator"></i></button>
+								</div>
+							</div>
+							<div class="form-group form-group-sm row">
+								<label class="control-label col-sm-5">
+									Resultado: <br>
+									Decimal: {{resultado}} <br>
+									Notación: {{ $parent.notacion(resultado) }}
+								</label>
+
+								<select class="form-control col-sm-2" v-model="medidafinal" @change="calcularCapacitancia" required>
+							 		<option v-for="(i, k) in medidas" :value="k" :title="i.nombre">{{ i.titulo }}</option>
+							 	</select>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+
+	<template id="acerca-de">
+		<div class="card shadow-sm">
+			<div class="card-body text-center">
+				
+			</div>
+		</div>
+	</template>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="./capacitancia.js"></script>
+	<script src="./resistencia.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>
