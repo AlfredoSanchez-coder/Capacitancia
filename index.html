@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Fisica</title>
+	<title>Capacitancia y Resistencia</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link href="./open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -11,7 +11,7 @@
 <body class="bg-light">
 	<div id="appFisica">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<a class="navbar-brand" href="javascript:;">Proyecto Expobatiz</a>
+			<a class="navbar-brand" href="">Calculadora</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -21,13 +21,89 @@
 						<a class="nav-link" :class="pantalla == 1 ? 'active': ''" href="javascript:;" @click="abrirPantalla(1)">Resistencia</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" :class="pantalla == 2 ? 'active': ''" href="javascript:;" @click="abrirPantalla(2)">Capacitacia</a>
+						<a class="nav-link" :class="pantalla == 2 ? 'active': ''" href="javascript:;" @click="abrirPantalla(2)">Capacitancia</a>
 					</li>
 					
 				</ul>
 			</div>  
 		</nav>
+		
+		<p align="right">De click en el concepto para usar la calculadora&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conozcamos los conceptos</h2>
+		
 		<hr>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<h3>Capacitancia</h3>
+					<p align="justify">Es la capacidad de un componente o circuito para <u>recoger y almacenar energía en forma
+							de carga eléctrica</u>.</p>
+					<img src="img/capacitancia.webp" height="260"><br>
+					
+					<p align="justify">El valor de la capacitancia de un capacitor se mide en faradios (<strong>F</strong>);
+						denominados así
+						en honor al físico inglés <strong>Faraday</strong> (1791-1867).</p>
+					<p align="justify">La capacitancia se expresa como la relación entre la carga eléctrica de cada conductor y
+						la diferencia de potencial (es decir, tensión) entre ellos.</p>
+					<p align="justify">Los capacitores son dispositivos que almacenan energía, disponibles en muchos tamaños y
+						formas. Consisten en dos placas
+						de material conductor (generalmente un metal fino) ubicado entre un aislador de cerámica, película,
+						vidrio u otros
+						materiales, incluso aire.</p>
+					<p align="justify">La conexión de capacitores en serie tiene las siguientes propiedades:</p>
+					<p align="justify"></p> - La capacitancia equivalente de la combinación de capacitores (<strong>C</strong>) se obtiene a partir de la
+					suma de los inversos de las capacitancias de los capacitores individuales.</p>
+					<p align="justify"><strong>En serie la capacitancia equivalente</strong> es la capacidad de almacenamiento de energía total presente en los capacitores de un
+					circuito, el valor total de los capacitores en serie es igual al recíproco de la suma de los recíprocos de las
+					capacitancias</p>
+					<img src="img/CEQUIVALENTE.jpg" height="50" align="center">&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="img/CTOTAL.jpg" height="60" align="center"><br><br>
+					<p align="justify"><strong>En paralelo la capacitancia equivalente</strong> del grupo de condensadores que están conectados en paralelo es igual a la suma de
+					capacidades de los condensadores individuales.</p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="img/CEQPARALELO.jpg" height="35" align="center">
+					<p align="justify"></p>
+		
+		
+					<img src="" height="20">
+				</div>
+				<div class="col-6">
+					<h3>Resistencia</h3>
+					<p align="justify">Es una medida de la <u>oposición al flujo de corriente en un circuito eléctrico</u>.</p>
+					<img src="img/resistencia.webp" height="260">
+					<p align="justify">La resistencia se mide en ohms, que se simboliza con la letra griega omega
+						(<strong>Ω</strong>). Se denominaron ohmios en honor a
+						<strong>Georg Simon Ohm </strong> (1784-1854), un físico alemán que estudió la relación entre voltaje,
+						corriente y resistencia.
+					</p>
+					<p align="justify">A quien se le atribuye la ley de Omh:</p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="img/OMH1.jpg" height="50">
+					<p align="justify">Es decir: <u>ohms = voltios x amperes</u>. En esta fórmula, <strong><i>R</i></strong> representa la
+						resistencia, <strong><i>i</i></strong> la corriente y <strong><i>v</i></strong> el voltage. </p>
+					<p align="justify">Todos los materiales resisten en cierta medida el flujo de corriente. Se incluyen en una
+						de dos amplias categorías:
+						<strong>&nbsp;Conductores y aislantes.</strong>
+					</p>
+					<img src="img/LEYOHM.jpg" height="250">
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<p align="center">D&eacute click en los conceptos y deslice hacia abajo para ver la calcularora</p>
+			<table margin="0" align="center">
+				<tr>
+					<td><a class="nav-link" :class="pantalla == 1 ? 'active': ''" href="javascript:;" @click="abrirPantalla(1)">Resistencia</a></td>
+					<td><a class="nav-link" :class="pantalla == 2 ? 'active': ''" href="javascript:;" @click="abrirPantalla(2)">Capacitancia</a></td>
+				</tr>
+			</table>
+		</div>
+
+		
 		<main class="container">
 			<div class="row">
 				<div class="col-sm-12">
@@ -171,6 +247,12 @@
 			</div>
 		</div>
 	</template>
+
+	<footer class="page-footer font-small blue">
+		<br><br><br>
+		<div class="footer-copyright text-center py-3">Aplicaci&oacuten realizada por alumnos del CECyT No. 9 "Juan de Dios B&aacutetiz"
+		
+	</footer>
 
 
 	<template id="acerca-de">
